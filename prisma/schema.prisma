@@ -1,0 +1,232 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum SubscriptionPlan {
+  FREE
+  PRO
+  EXECUTIVE
+}
+
+enum ReportStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+}
+
+enum JobSearchStatus {
+  NOT_LOOKING
+  CASUALLY_OPEN
+  ACTIVELY_LOOKING
+  TRYING_TO_GET_PROMOTED
+  CONSIDERING_FOUNDER_PATH
+}
+
+enum ShareCardType {
+  CAREER_VALUE
+  UNDERPAID
+  CAREER_DNA
+  LOST_MONEY
+  DREAM_PATH
+  CAREER_AGE
+  RESUME_ROAST
+  SKILL_UNLOCK
+  CAREER_VELOCITY
+  FOUNDER_READINESS
+}
+
+model User {
+  id                 String           @id @default(cuid())
+  email              String           @unique
+  emailVerified      DateTime?
+  name               String?
+  image              String?
+  passwordHash       String?
+  subscriptionStatus SubscriptionPlan @default(FREE)
+  stripeCustomerId   String?
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+
+  accounts       Account[]
+  sessions       Session[]
+  profiles       CareerProfile[]
+  reports        CareerReport[]
+  shareCards     ShareCard[]
+  uploadedFiles  UploadedFile[]
+  analyticsEvents AnalyticsEvent[]
+  subscriptions  Subscription[]
+  aiUsageLogs    AiUsageLog[]
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model CareerProfile {
+  id                       String          @id @default(cuid())
+  userId                   String
+  rawResumeText            String          @db.Text
+  rawLinkedInText          String?         @db.Text
+  currentTitle             String?
+  currentCompany           String?
+  location                 String?
+  yearsExperience          Int?
+  currentCompensationMin     Int?
+  currentCompensationMax     Int?
+  currentCompensationCurrency String       @default("USD")
+  targetCompensation       Int?
+  targetRole               String?
+  dreamRole                String?
+  targetIndustries         Json?
+  jobSearchStatus          JobSearchStatus @default(CASUALLY_OPEN)
+  relocationPreference     String?
+  remotePreference         String?
+  careerGoal               String?
+  biggestFrustration       String?
+  createdAt                DateTime        @default(now())
+  updatedAt                DateTime        @updatedAt
+
+  user    User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  reports CareerReport[]
+}
+
+model CareerReport {
+  id             String       @id @default(cuid())
+  userId         String
+  profileId      String
+  status         ReportStatus @default(PENDING)
+  aiModel        String?
+  summary        Json?
+  careerValue    Json?
+  careerDna      Json?
+  lostMoney      Json?
+  dreamPath      Json?
+  resumeRoast    Json?
+  profileFixes   Json?
+  skillGaps      Json?
+  next30DaysPlan Json?
+  fullReport     Json?
+  errorMessage   String?
+  isProUnlocked  Boolean      @default(false)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  profile    CareerProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  shareCards ShareCard[]
+  aiUsageLogs AiUsageLog[]
+}
+
+model ShareCard {
+  id         String        @id @default(cuid())
+  userId     String
+  reportId   String
+  type       ShareCardType
+  title      String
+  subtitle   String?
+  valueText  String?
+  bodyText   String?
+  imageUrl   String?
+  theme      String        @default("default")
+  isPublic   Boolean       @default(true)
+  viewCount  Int           @default(0)
+  shareCount Int           @default(0)
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
+
+  user   User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  report CareerReport @relation(fields: [reportId], references: [id], onDelete: Cascade)
+}
+
+model UploadedFile {
+  id            String   @id @default(cuid())
+  userId        String?
+  filename      String
+  mimeType      String
+  size          Int
+  storagePath   String
+  extractedText String?  @db.Text
+  createdAt     DateTime @default(now())
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+}
+
+model AnalyticsEvent {
+  id         String   @id @default(cuid())
+  userId     String?
+  sessionId  String?
+  eventName  String
+  properties Json?
+  createdAt  DateTime @default(now())
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+}
+
+model Subscription {
+  id                   String           @id @default(cuid())
+  userId               String
+  plan                 SubscriptionPlan @default(FREE)
+  status               String           @default("active")
+  stripeSubscriptionId String?
+  currentPeriodEnd     DateTime?
+  createdAt            DateTime         @default(now())
+  updatedAt            DateTime         @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model AiUsageLog {
+  id               String   @id @default(cuid())
+  userId           String?
+  reportId         String?
+  provider         String
+  model            String
+  requestType      String
+  inputTokens      Int?
+  outputTokens     Int?
+  totalTokens      Int?
+  estimatedCostUsd Float?
+  success          Boolean  @default(true)
+  errorMessage     String?
+  createdAt        DateTime @default(now())
+
+  user   User?         @relation(fields: [userId], references: [id], onDelete: SetNull)
+  report CareerReport? @relation(fields: [reportId], references: [id], onDelete: SetNull)
+}
