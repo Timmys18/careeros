@@ -13,7 +13,7 @@ const COST_PER_1K_INPUT = 0.00015;
 const COST_PER_1K_OUTPUT = 0.0006;
 
 export function isMockAiEnabled(): boolean {
-  return getEnvBool("ENABLE_MOCK_AI", true) || !process.env.OPENAI_API_KEY;
+  return getEnvBool("ENABLE_MOCK_AI", false) || !process.env.OPENAI_API_KEY;
 }
 
 export async function generateCareerReport(

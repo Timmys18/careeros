@@ -11,13 +11,13 @@ const PLANS = [
   {
     name: "Free",
     price: "$0",
-    desc: "Get started with your career snapshot",
+    desc: "Get your first career diagnosis",
     features: [
       "Basic Career Value",
       "Career DNA",
       "Limited report",
+      "First weekly missions",
       "3 share cards",
-      "Demo access",
     ],
     cta: "Get started",
     href: "/start",
@@ -27,16 +27,17 @@ const PLANS = [
     name: "Pro",
     price: "$29",
     period: "/month",
-    desc: "Full report and all share cards",
+    desc: "Ongoing AI career agent",
     features: [
       "Full report",
+      "Weekly agent missions",
       "All share cards",
       "LinkedIn rewrite",
       "Resume bullets",
       "Skill gaps",
       "Next 30 days plan",
       "Deeper salary analysis",
-      "Report regeneration",
+      "Agent refresh and report regeneration",
     ],
     cta: "Upgrade to Pro",
     highlight: true,
@@ -45,23 +46,22 @@ const PLANS = [
     name: "Executive",
     price: "$149",
     period: "/month",
-    desc: "Coming soon — white-glove career strategy",
+    desc: "White-glove positioning system",
     features: [
       "Everything in Pro",
       "1:1 career strategy sessions",
       "Executive positioning",
       "Priority support",
     ],
-    cta: "Join waitlist",
+    cta: "Start executive setup",
     highlight: false,
-    comingSoon: true,
+    href: "/start",
   },
 ];
 
 export default function PricingPage() {
   const { data: session } = useSession();
   const [loading, setLoading] = useState(false);
-  const [waitlist, setWaitlist] = useState(false);
 
   async function handleCheckout() {
     if (!session) {
@@ -83,7 +83,7 @@ export default function PricingPage() {
       <div className="mx-auto max-w-6xl px-4 py-16">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-white">Pricing</h1>
-          <p className="mt-2 text-zinc-400">Your market value changed. Your title didn&apos;t.</p>
+          <p className="mt-2 text-zinc-400">The report is free to start. The agent loop is what compounds.</p>
         </div>
 
         <div className="grid gap-6 md:grid-cols-3">
@@ -109,15 +109,7 @@ export default function PricingPage() {
                     </li>
                   ))}
                 </ul>
-                {plan.comingSoon ? (
-                  <Button
-                    variant="secondary"
-                    className="w-full"
-                    onClick={() => setWaitlist(true)}
-                  >
-                    {waitlist ? "You're on the list" : plan.cta}
-                  </Button>
-                ) : plan.highlight ? (
+                {plan.highlight ? (
                   <Button className="w-full" onClick={handleCheckout} disabled={loading}>
                     {loading ? "Processing..." : plan.cta}
                   </Button>

@@ -38,21 +38,21 @@ export default function LandingPage() {
               Your career has no agent. Now it does.
             </div>
 
-            <h1 className="font-display text-[2.75rem] font-bold leading-[1.05] tracking-tight sm:text-6xl lg:text-[4.25rem]">
+            <h1 className="font-display text-[2.35rem] font-bold leading-[1.05] tracking-tight sm:text-6xl lg:text-[4.25rem]">
               <span className="text-white">Know your true</span>
               <br />
               <span className="text-gradient-accent">career value.</span>
             </h1>
 
             <p className="mt-6 max-w-lg text-lg leading-relaxed text-zinc-400">
-              Upload your resume and get your AI Career Report — market value, Career DNA,
-              lost money, and your next best move.
+              Upload your resume and launch a private AI career agent: market value,
+              Career DNA, resume roast, weekly missions, and your next best move.
             </p>
 
             <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
               <Button asChild size="lg" className="glow-ring">
                 <Link href="/start">
-                  Get my Career Report
+                  Build my career agent
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </Button>
@@ -68,7 +68,7 @@ export default function LandingPage() {
               </span>
               <span className="flex items-center gap-1.5">
                 <Zap className="h-3.5 w-3.5 text-zinc-600" />
-                Report in ~30 seconds
+                First diagnosis in ~30 seconds
               </span>
             </div>
           </motion.div>
@@ -115,7 +115,7 @@ export default function LandingPage() {
       {/* Social proof strip */}
       <section className="border-y border-white/[0.06] bg-white/[0.01]">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-10 gap-y-4 px-4 py-6 text-center text-sm text-zinc-500 sm:px-6">
-          {["Market value ranges", "Career DNA profiling", "Lost money analysis", "Viral share cards", "30-day action plan"].map(
+          {["Market value ranges", "Career DNA profiling", "Lost money analysis", "Weekly agent missions", "Private share cards"].map(
             (item) => (
               <span key={item} className="flex items-center gap-2">
                 <Sparkles className="h-3 w-3 text-violet-500/60" />
@@ -133,7 +133,7 @@ export default function LandingPage() {
             Product preview
           </p>
           <h2 className="font-display mt-3 text-3xl font-bold text-white sm:text-4xl">
-            Bloomberg Terminal for your career
+            Career command center, not a PDF
           </h2>
         </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -141,8 +141,8 @@ export default function LandingPage() {
             { title: "AI estimated my market value", value: "$160k–210k/year", sub: "Product Manager, 7 years", theme: "status" },
             { title: "My Career DNA", value: "Builder-Operator", sub: "I turn chaos into systems.", theme: "identity" },
             { title: "Loyalty discount detected", value: "$42k/year", sub: "I may be underpaid by this much.", theme: "fomo" },
-            { title: "Money left on the table", value: "$120k–180k", sub: "Estimated over 5 years", theme: "serious" },
-            { title: "My 10-year career path", body: "PM → Head of Product → VP → Founder", theme: "status" },
+            { title: "Money left on the table", value: "$120k-180k", sub: "Estimated over 5 years", theme: "serious" },
+            { title: "This week's mission", body: "Rewrite the top 3 bullets around measurable business impact.", theme: "status" },
             { title: "CareerOS roasted my resume", body: "This is not a resume. This is a cry for positioning help.", theme: "funny" },
           ].map((card, i) => (
             <ShareCardVisual
@@ -163,13 +163,13 @@ export default function LandingPage() {
       <section className="mx-auto max-w-6xl px-4 pb-20 sm:px-6 sm:pb-28">
         <div className="mb-12 text-center">
           <h2 className="font-display text-3xl font-bold text-white">Why CareerOS</h2>
-          <p className="mt-3 text-zinc-400">Not another resume builder. A new category.</p>
+          <p className="mt-3 text-zinc-400">Not another resume builder. A private operating rhythm for your career.</p>
         </div>
         <div className="grid gap-5 md:grid-cols-3">
           {[
-            { icon: TrendingUp, title: "Market value, not guesswork", desc: "AI-estimated ranges with confidence scores — not generic salary sites." },
-            { icon: Sparkles, title: "Career DNA", desc: "Understand how you operate: Builder, Operator, Visionary, Founder." },
-            { icon: Shield, title: "Private by default", desc: "Share only what you choose. Your report stays yours." },
+            { icon: TrendingUp, title: "Market value, not guesswork", desc: "AI-estimated ranges with confidence scores, caveats, and salary leverage." },
+            { icon: Sparkles, title: "Agent missions", desc: "Every report becomes weekly actions, not a dead-end document." },
+            { icon: Shield, title: "Private by default", desc: "Share only what you choose. Your report, cards, and career memory stay yours." },
           ].map(({ icon: Icon, title, desc }, i) => (
             <motion.div
               key={title}
@@ -199,11 +199,11 @@ export default function LandingPage() {
             <span className="text-gradient-accent">You are under-positioned.</span>
           </h2>
           <p className="relative mx-auto mt-4 max-w-md text-zinc-400">
-            Free to start. Pro for the full picture — $29/month.
+            Free to start. Pro for the full agent loop - $29/month.
           </p>
           <div className="relative mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Button asChild size="lg">
-              <Link href="/start">Get my Career Report</Link>
+              <Link href="/start">Build my career agent</Link>
             </Button>
             <Button asChild variant="outline" size="lg">
               <Link href="/pricing">View pricing</Link>

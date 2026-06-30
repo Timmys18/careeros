@@ -1,5 +1,4 @@
 import { prisma } from "@/lib/prisma";
-import { auth } from "@/lib/auth";
 import { generateCareerReport, sanitizeProfileInput } from "@/lib/ai/generate-report";
 import { mapShareCardsFromReport } from "@/lib/cards";
 import { checkReportRateLimits } from "@/lib/rate-limit";

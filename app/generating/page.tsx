@@ -2,14 +2,14 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 const STEPS = [
-  "Building your Career Twin...",
+  "Building your career agent memory...",
   "Estimating your market value...",
-  "Mapping your career paths...",
-  "Finding lost money...",
-  "Generating share cards...",
+  "Finding the positioning gap...",
+  "Turning the report into weekly missions...",
+  "Generating private share cards...",
 ];
 
 export default function GeneratingPage() {
@@ -37,6 +37,10 @@ export default function GeneratingPage() {
         }
 
         const answers = JSON.parse(onboarding);
+        const frustration = [answers.frustration, answers.agentBrief]
+          .filter(Boolean)
+          .join(" Agent honesty brief: ");
+
         const profileRes = await fetch("/api/profile", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -49,13 +53,17 @@ export default function GeneratingPage() {
             currentCompensationMin: parseInt(answers.currentCompMin, 10) || undefined,
             currentCompensationMax: parseInt(answers.currentCompMax, 10) || undefined,
             targetCompensation: parseInt(answers.targetComp, 10) || undefined,
-            dreamRole: answers.dreamRole,
-            targetIndustries: answers.industries?.split(",").map((s: string) => s.trim()).filter(Boolean),
+            targetRole: answers.targetRole,
+            dreamRole: answers.dreamRole || answers.targetRole,
+            targetIndustries: answers.industries
+              ?.split(",")
+              .map((s: string) => s.trim())
+              .filter(Boolean),
             jobSearchStatus: answers.jobSearchStatus,
             relocationPreference: answers.relocation,
             remotePreference: answers.remotePreference,
             careerGoal: answers.careerGoal,
-            biggestFrustration: answers.frustration,
+            biggestFrustration: frustration,
           }),
         });
         const data = await profileRes.json();
@@ -125,7 +133,7 @@ export default function GeneratingPage() {
           {STEPS[stepIndex]}
         </motion.p>
       </AnimatePresence>
-      <p className="mt-4 text-sm text-zinc-500">Usually 15–30 seconds</p>
+      <p className="mt-4 text-sm text-zinc-500">Usually 15-30 seconds</p>
     </div>
   );
 }
