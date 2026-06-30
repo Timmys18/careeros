@@ -20,7 +20,7 @@ export function Footer() {
               <p className="text-xs font-medium uppercase tracking-wider text-zinc-500">Product</p>
               <ul className="mt-3 space-y-2 text-sm text-zinc-400">
                 <li><Link href="/demo" className="hover:text-white transition-colors">Demo</Link></li>
-                <li><Link href="/start" className="hover:text-white transition-colors">Get Report</Link></li>
+                <li><Link href="/start" className="hover:text-white transition-colors">Build Agent</Link></li>
                 <li><Link href="/pricing" className="hover:text-white transition-colors">Pricing</Link></li>
               </ul>
             </div>

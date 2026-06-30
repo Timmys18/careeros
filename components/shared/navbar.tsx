@@ -14,7 +14,7 @@ const publicLinks = [
 
 const authLinks = [
   { href: "/dashboard", label: "Dashboard" },
-  { href: "/start", label: "New Report" },
+  { href: "/start", label: "Refresh Agent" },
   { href: "/cards", label: "Cards" },
   { href: "/pricing", label: "Pricing" },
 ];
@@ -75,7 +75,7 @@ export function Navbar() {
             </>
           ) : (
             <Button asChild size="sm" className="hidden sm:inline-flex">
-              <Link href="/start">Get Report</Link>
+              <Link href="/start">Build Agent</Link>
             </Button>
           )}
           <button
@@ -117,7 +117,7 @@ export function Navbar() {
               </Link>
               <Button asChild className="mt-2">
                 <Link href="/start" onClick={() => setOpen(false)}>
-                  Get my Career Report
+                  Build my career agent
                 </Link>
               </Button>
             </>

@@ -61,12 +61,13 @@ Open [http://localhost:3000](http://localhost:3000)
 
 ## Mock AI Mode
 
-Set `ENABLE_MOCK_AI=true` (default) or leave `OPENAI_API_KEY` empty.
+Set `ENABLE_MOCK_AI=true` explicitly, or leave `OPENAI_API_KEY` empty.
 
 - No external AI calls
 - Deterministic mock reports based on profile input
 - Full product flow works without API key
 - Dev banner shows when mock mode is active
+- When an OpenAI key exists and `ENABLE_MOCK_AI` is false, CareerOS uses real AI.
 
 ## Real AI Mode
 

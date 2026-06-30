@@ -19,7 +19,7 @@ export function formatCurrency(
 }
 
 export function formatRange(min: number, max: number, currency = "USD"): string {
-  return `${formatCurrency(min, currency)}–${formatCurrency(max, currency)}`;
+  return `${formatCurrency(min, currency)}-${formatCurrency(max, currency)}`;
 }
 
 export function truncateText(text: string, maxChars: number): string {

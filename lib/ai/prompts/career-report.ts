@@ -4,7 +4,18 @@ import type { ProfileInput } from "../schemas";
 export function buildCareerReportPrompt(profile: ProfileInput): string {
   return `${SYSTEM_PROMPT}
 
-Product context: CareerOS helps professionals understand their market value, career DNA, lost money, and next best move. Tone: sharp, premium, confident, slightly provocative.
+Product context: CareerOS is not a static resume tool. It is a private AI career agent that diagnoses the user, chooses a strategy, and turns the report into weekly execution.
+
+Tone: sharp, premium, confident, direct, slightly provocative. Be honest enough to be useful, but never cruel.
+
+Product requirements:
+- Treat the report as the first state of an ongoing career operating system.
+- Every analysis section must lead to action, not just insight.
+- The 30-day plan must be concrete enough to become dashboard missions.
+- The nextBestMove must be specific, time-bound, and tied to the user's stated mode/goal.
+- Resume roast should expose weak positioning and then immediately give a stronger positioning angle.
+- Compensation analysis must include caveats and never guarantee offers, raises, or outcomes.
+- If the resume lacks data, say what proof is missing and how to collect it.
 
 Generate a complete Career Report as JSON matching this schema:
 ${CAREER_REPORT_JSON_SCHEMA}
