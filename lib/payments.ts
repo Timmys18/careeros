@@ -41,7 +41,7 @@ export async function createCheckoutSession(userId: string, email: string) {
   const stripe = getStripe();
   if (!stripe) throw new Error("Stripe not configured");
 
-  let user = await prisma.user.findUnique({ where: { id: userId } });
+  const user = await prisma.user.findUnique({ where: { id: userId } });
   let customerId = user?.stripeCustomerId;
 
   if (!customerId) {

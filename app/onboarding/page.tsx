@@ -294,7 +294,7 @@ export default function OnboardingPage() {
                     </Field>
                   </div>
                   <div className="rounded-xl border border-amber-400/15 bg-amber-400/[0.06] p-4 text-sm text-amber-100/90">
-                    Compensation is optional, but it unlocks the most useful "lost money" and negotiation analysis.
+                    Compensation is optional, but it unlocks the most useful lost-money and negotiation analysis.
                   </div>
                 </SetupPanel>
               )}

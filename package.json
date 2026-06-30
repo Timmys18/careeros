@@ -18,6 +18,11 @@
   "prisma": {
     "seed": "npx tsx prisma/seed.ts"
   },
+  "overrides": {
+    "@hono/node-server": "1.19.13",
+    "es-abstract": "1.24.1",
+    "postcss": "8.5.16"
+  },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.2",
     "@prisma/adapter-pg": "^7.8.0",

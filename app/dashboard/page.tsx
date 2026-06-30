@@ -17,7 +17,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ShareCardVisual } from "@/components/cards/share-card-visual";
 import { trackEvent, EVENTS } from "@/lib/analytics";
 import type { CareerReportAIOutput } from "@/lib/ai/schemas";
-import { formatCurrency, formatRange } from "@/lib/utils";
+import { formatRange } from "@/lib/utils";
 import {
   buildWeeklyMissions,
   getAgentModeByStatus,
@@ -144,7 +144,7 @@ export default async function DashboardPage({
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <CalendarCheck2 className="h-5 w-5 text-violet-300" />
-                    This week's missions
+                    This week&apos;s missions
                   </CardTitle>
                   <p className="text-sm text-zinc-400">
                     These are pulled from the report and converted into actions. Do these before regenerating.
